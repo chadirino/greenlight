@@ -591,6 +591,21 @@
           "id": "il-ch13-07",
           "label": "Reduced-fee License Plates",
           "chunkId": "il-ch13-07"
+        },
+        {
+          "id": "il-ch13-08",
+          "label": "Mandatory Insurance",
+          "chunkId": "il-ch13-08"
+        },
+        {
+          "id": "il-ch13-09",
+          "label": "Emissions Testing",
+          "chunkId": "il-ch13-09"
+        },
+        {
+          "id": "il-ch13-10",
+          "label": "License Plates and Parking Placards for Persons with Disabilities",
+          "chunkId": "il-ch13-10"
         }
       ]
     }

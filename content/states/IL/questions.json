@@ -6845,15 +6845,15 @@
     "topicId": "ch13-owning-a-vehicle",
     "subtopicId": "il-ch13-07",
     "chapter": 13,
-    "question": "Who is eligible for reduced license plate fees through the Benefit Access Program?",
+    "question": "Who is eligible for reduced-fee license plates through the Benefit Access Program?",
     "options": [
-      "Senior citizens and persons with disabilities who qualify for Benefit Access Program tax relief through the Illinois Department on Aging",
-      "All veterans regardless of income",
-      "Any first-time vehicle owner in Illinois",
-      "College students with a valid ID"
+      "Senior citizens and persons with disabilities who qualify for the program",
+      "Any driver over age 65, regardless of income",
+      "Veterans only",
+      "First-time vehicle owners"
     ],
     "answerIndex": 0,
-    "explanation": "The text states: 'Senior citizens and persons with disabilities who qualify for the Benefit Access Program (formerly known as Circuit Breaker) tax relief through the Illinois Department on Aging are eligible for reduced license plate fees.'",
+    "explanation": "The text states senior citizens and persons with disabilities who qualify for the Benefit Access Program (formerly Circuit Breaker) tax relief are eligible.",
     "source": {
       "chunkId": "il-ch13-07",
       "chapterTitle": "Owning a Vehicle"
@@ -6865,177 +6865,237 @@
     "topicId": "ch13-owning-a-vehicle",
     "subtopicId": "il-ch13-07",
     "chapter": 13,
-    "question": "How many reduced-fee license plate discounts are allowed per year under the Benefit Access Program?",
+    "question": "How many reduced-fee license plate discounts are allowed per year?",
     "options": [
       "One",
       "Two",
-      "Three",
+      "Four",
       "Unlimited"
     ],
     "answerIndex": 0,
-    "explanation": "The text states: 'One discount per year is allowed.'",
+    "explanation": "The text states one discount per year is allowed.",
     "source": {
       "chunkId": "il-ch13-07",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q3",
+    "id": "il-ch13-08-q1",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-08",
     "chapter": 13,
-    "question": "What is the minimum liability insurance coverage required in Illinois for injury or death of more than one person in a crash?",
+    "question": "What is the minimum liability insurance coverage in Illinois for injury or death of one person in a crash?",
     "options": [
       "$20,000",
       "$25,000",
       "$50,000",
       "$100,000"
     ],
-    "answerIndex": 2,
-    "explanation": "The text lists minimum liability limits including '$50,000 for injury or death of more than one person in a crash.'",
+    "answerIndex": 1,
+    "explanation": "The text lists $25,000 for injury or death of one person in a crash as a minimum liability limit.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-08",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q4",
+    "id": "il-ch13-08-q2",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-08",
     "chapter": 13,
-    "question": "What is the minimum liability insurance coverage required in Illinois for property damage to another person?",
+    "question": "What is the minimum liability insurance coverage in Illinois for injury or death of more than one person in a crash?",
+    "options": [
+      "$25,000",
+      "$40,000",
+      "$50,000",
+      "$75,000"
+    ],
+    "answerIndex": 2,
+    "explanation": "The text lists $50,000 for injury or death of more than one person in a crash as a minimum liability limit.",
+    "source": {
+      "chunkId": "il-ch13-08",
+      "chapterTitle": "Owning a Vehicle"
+    }
+  },
+  {
+    "id": "il-ch13-08-q3",
+    "state": "IL",
+    "topicId": "ch13-owning-a-vehicle",
+    "subtopicId": "il-ch13-08",
+    "chapter": 13,
+    "question": "What is the minimum liability coverage in Illinois for damage to another person's property?",
     "options": [
       "$10,000",
+      "$15,000",
       "$20,000",
-      "$25,000",
-      "$50,000"
+      "$30,000"
     ],
-    "answerIndex": 1,
-    "explanation": "The text lists '$20,000 for damage to property of another person' as a minimum liability limit.",
+    "answerIndex": 2,
+    "explanation": "The text lists $20,000 for damage to property of another person as a minimum liability limit.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-08",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q5",
+    "id": "il-ch13-08-q4",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-08",
     "chapter": 13,
-    "question": "How is the mandatory insurance law enforced in Illinois, per the text?",
+    "question": "How is the mandatory insurance law primarily enforced in Illinois?",
     "options": [
       "Only through annual mailed audits",
-      "Only at designated insurance verification checkpoints",
-      "Through random computer checks by the Secretary of State's office and the issuance of traffic tickets",
+      "Only at designated roadside checkpoints",
+      "Random computer checks by the Secretary of State's office and issuance of traffic tickets",
       "Only when a driver is involved in a crash"
     ],
     "answerIndex": 2,
-    "explanation": "The text states: 'Enforcement of the law is managed through random computer checks by the Secretary of State's office and the issuance of traffic tickets.'",
+    "explanation": "The text states enforcement of the law is managed through random computer checks by the Secretary of State's office and the issuance of traffic tickets.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-08",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q6",
+    "id": "il-ch13-09-q1",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-09",
     "chapter": 13,
-    "question": "In which three counties is vehicle emissions testing required in full, per the text?",
+    "question": "Emissions testing is required in all of which counties in Illinois?",
     "options": [
       "Cook, DuPage, and Lake",
       "Kane, Kendall, and McHenry",
       "Will, Madison, and Monroe",
-      "St. Clair, Kane, and Cook"
+      "All 102 Illinois counties"
     ],
     "answerIndex": 0,
-    "explanation": "The text states emissions testing is required 'in the following counties: all of Cook, DuPage and Lake, and parts of Kane, Kendall, McHenry, Will, Madison, Monroe, and St. Clair.'",
+    "explanation": "The text states a vehicle emissions test is required in all of Cook, DuPage and Lake, and only parts of Kane, Kendall, McHenry, Will, Madison, Monroe, and St. Clair.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-09",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q7",
+    "id": "il-ch13-09-q2",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-09",
     "chapter": 13,
-    "question": "What must a vehicle owner do if they move out of the area requiring emissions testing?",
+    "question": "Which agency administers Illinois's required vehicle emissions test?",
     "options": [
-      "Nothing is required",
+      "Illinois Environmental Protection Agency (IEPA)",
+      "Illinois Department of Transportation",
+      "Secretary of State's Environmental Office",
+      "U.S. Environmental Protection Agency"
+    ],
+    "answerIndex": 0,
+    "explanation": "The text states vehicles must pass an Illinois Environmental Protection Agency (IEPA) emissions test for the Secretary of State's office to renew the vehicle's registration.",
+    "source": {
+      "chunkId": "il-ch13-09",
+      "chapterTitle": "Owning a Vehicle"
+    }
+  },
+  {
+    "id": "il-ch13-09-q3",
+    "state": "IL",
+    "topicId": "ch13-owning-a-vehicle",
+    "subtopicId": "il-ch13-09",
+    "chapter": 13,
+    "question": "If you move out of an area where emissions testing is required, what must you do?",
+    "options": [
+      "Nothing; testing continues automatically",
       "Notify the Secretary of State",
-      "Contact the IEPA directly for a waiver form",
-      "Request a refund of testing fees"
+      "Return your license plates immediately",
+      "Schedule a final emissions test within 10 days"
     ],
     "answerIndex": 1,
-    "explanation": "The text states: 'If you move from the area in which testing is required, you must notify the Secretary of State.'",
+    "explanation": "The text states if you move from the area in which testing is required, you must notify the Secretary of State.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-09",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q8",
+    "id": "il-ch13-10-q1",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-10",
     "chapter": 13,
-    "question": "Under what circumstance may an immediate family member obtain two sets of Persons with Disabilities License Plates?",
+    "question": "Which type of disability parking placard is the only one that exempts the holder from parking meter fees and time limitations (for meters exceeding a 30-minute limit)?",
     "options": [
-      "If the qualifying person with disabilities does not own a vehicle and must rely on someone else for transportation, and the family member resides in the same household",
-      "Anytime a family member requests them, regardless of vehicle ownership",
-      "Only if the qualifying person has passed away",
-      "Only for corporations, not individuals"
-    ],
-    "answerIndex": 0,
-    "explanation": "The text states: 'An immediate family member residing in the same household may obtain two sets of plates if the qualifying person with disabilities does not own a vehicle and must rely on someone else for transportation.'",
-    "source": {
-      "chunkId": "il-ch13-07",
-      "chapterTitle": "Owning a Vehicle"
-    }
-  },
-  {
-    "id": "il-ch13-07-q9",
-    "state": "IL",
-    "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
-    "chapter": 13,
-    "question": "Which type of disability parking placard exempts the holder from parking meter fees and time limitations exceeding a 30-minute limit?",
-    "options": [
-      "Meter-Exempt Permanent",
       "Permanent",
       "Temporary",
+      "Meter-Exempt Permanent",
       "Organization"
     ],
-    "answerIndex": 0,
-    "explanation": "The text states the Meter-Exempt Permanent placard 'exempts the holder from parking meter fees and time limitations at meters exceeding a 30-minute time limit,' while the Permanent, Temporary, and Organization placards do not.",
+    "answerIndex": 2,
+    "explanation": "The text states the Meter-Exempt Permanent placard exempts the holder from parking meter fees and time limitations at meters exceeding a 30-minute limit; the other three types do not.",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-10",
       "chapterTitle": "Owning a Vehicle"
     }
   },
   {
-    "id": "il-ch13-07-q10",
+    "id": "il-ch13-10-q2",
     "state": "IL",
     "topicId": "ch13-owning-a-vehicle",
-    "subtopicId": "il-ch13-07",
+    "subtopicId": "il-ch13-10",
     "chapter": 13,
-    "question": "What is the maximum duration for a Temporary disability parking placard issued by a local municipality?",
+    "question": "A Temporary disability parking placard issued by the Secretary of State is valid for up to how long?",
     "options": [
       "30 days",
       "90 days",
       "Six months",
       "One year"
     ],
-    "answerIndex": 1,
-    "explanation": "The text states the Temporary placard 'is valid for the length of time indicated by the certifying physician, not to exceed six months if issued by the Secretary of State and 90 days if issued by a local municipality.'",
+    "answerIndex": 2,
+    "explanation": "The text states a Temporary placard is valid for the length of time set by the certifying physician, not to exceed six months if issued by the Secretary of State (90 days if issued by a local municipality).",
     "source": {
-      "chunkId": "il-ch13-07",
+      "chunkId": "il-ch13-10",
+      "chapterTitle": "Owning a Vehicle"
+    }
+  },
+  {
+    "id": "il-ch13-10-q3",
+    "state": "IL",
+    "topicId": "ch13-owning-a-vehicle",
+    "subtopicId": "il-ch13-10",
+    "chapter": 13,
+    "question": "When may an immediate family member obtain two sets of Persons with Disabilities License Plates?",
+    "options": [
+      "Anytime, regardless of circumstances",
+      "Only if the qualifying person with disabilities does not own a vehicle and must rely on someone else for transportation",
+      "Only if the family member is also disabled",
+      "Never — plates are limited to one set per household"
+    ],
+    "answerIndex": 1,
+    "explanation": "The text states an immediate family member residing in the same household may obtain two sets of plates if the qualifying person with disabilities does not own a vehicle and must rely on someone else for transportation.",
+    "source": {
+      "chunkId": "il-ch13-10",
+      "chapterTitle": "Owning a Vehicle"
+    }
+  },
+  {
+    "id": "il-ch13-10-q4",
+    "state": "IL",
+    "topicId": "ch13-owning-a-vehicle",
+    "subtopicId": "il-ch13-10",
+    "chapter": 13,
+    "question": "Organization disability parking placards expire on what date?",
+    "options": [
+      "December 31, 2026",
+      "The holder's birth month",
+      "April 30, 2026",
+      "They never expire"
+    ],
+    "answerIndex": 2,
+    "explanation": "The text states Organization placards expire on April 30, 2026.",
+    "source": {
+      "chunkId": "il-ch13-10",
       "chapterTitle": "Owning a Vehicle"
     }
   }
