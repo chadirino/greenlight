@@ -1,0 +1,14 @@
+{
+  "state": "IL",
+  "stateName": "Illinois",
+  "source": {
+    "name": "Illinois Rules of the Road",
+    "publisher": "Illinois Secretary of State",
+    "formNumber": "DSD A 112",
+    "edition": "2026",
+    "url": "https://www.ilsos.gov/publications/motorist/rorts.html"
+  },
+  "chapterCount": 13,
+  "chunkCount": 99,
+  "generatedAt": "2026-07-09"
+}

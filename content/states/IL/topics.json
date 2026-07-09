@@ -1,0 +1,598 @@
+{
+  "state": "IL",
+  "source": {
+    "name": "Illinois Rules of the Road",
+    "publisher": "Illinois Secretary of State",
+    "formNumber": "DSD A 112",
+    "edition": "2026",
+    "url": "https://www.ilsos.gov/publications/motorist/rorts.html"
+  },
+  "topics": [
+    {
+      "id": "ch01-illinois-drivers-license",
+      "chapter": 1,
+      "label": "Illinois Driver’s License",
+      "subtopics": [
+        {
+          "id": "il-ch01-01",
+          "label": "Age Restrictions — Drivers 16-21",
+          "chunkId": "il-ch01-01"
+        },
+        {
+          "id": "il-ch01-02",
+          "label": "Exemptions",
+          "chunkId": "il-ch01-02"
+        },
+        {
+          "id": "il-ch01-03",
+          "label": "Changing the Name/Address on an Illinois Driver’s License/ID Card",
+          "chunkId": "il-ch01-03"
+        },
+        {
+          "id": "il-ch01-04",
+          "label": "Document/ID Requirements for Driver’s License/ID Card",
+          "chunkId": "il-ch01-04"
+        },
+        {
+          "id": "il-ch01-05",
+          "label": "Driver’s License/ID Card Renewal",
+          "chunkId": "il-ch01-05"
+        },
+        {
+          "id": "il-ch01-06",
+          "label": "Penalties for Driver’s License/ID Card Fraud",
+          "chunkId": "il-ch01-06"
+        },
+        {
+          "id": "il-ch01-07",
+          "label": "Medical Report",
+          "chunkId": "il-ch01-07"
+        },
+        {
+          "id": "il-ch01-08",
+          "label": "Driving Records/Abstracts",
+          "chunkId": "il-ch01-08"
+        },
+        {
+          "id": "il-ch01-09",
+          "label": "Non-Driving Programs Related to the Driver’s License",
+          "chunkId": "il-ch01-09"
+        },
+        {
+          "id": "il-ch01-10",
+          "label": "Driver’s License/State ID Card Fees",
+          "chunkId": "il-ch01-10"
+        },
+        {
+          "id": "il-ch01-11",
+          "label": "Expanded Online Services",
+          "chunkId": "il-ch01-11"
+        }
+      ]
+    },
+    {
+      "id": "ch02-drivers-license-exams",
+      "chapter": 2,
+      "label": "Driver’s License Exams",
+      "subtopics": [
+        {
+          "id": "il-ch02-01",
+          "label": "Cheating and Bribery",
+          "chunkId": "il-ch02-01"
+        },
+        {
+          "id": "il-ch02-02",
+          "label": "Vision Screening",
+          "chunkId": "il-ch02-02"
+        },
+        {
+          "id": "il-ch02-03",
+          "label": "Written Exam",
+          "chunkId": "il-ch02-03"
+        },
+        {
+          "id": "il-ch02-04",
+          "label": "Driving Exam",
+          "chunkId": "il-ch02-04"
+        },
+        {
+          "id": "il-ch02-05",
+          "label": "Special Services",
+          "chunkId": "il-ch02-05"
+        }
+      ]
+    },
+    {
+      "id": "ch03-drivers-under-age-21",
+      "chapter": 3,
+      "label": "Drivers Under Age 21",
+      "subtopics": [
+        {
+          "id": "il-ch03-01",
+          "label": "Obtaining an Instruction Permit",
+          "chunkId": "il-ch03-01"
+        },
+        {
+          "id": "il-ch03-02",
+          "label": "Applying for an Illinois Driver’s License",
+          "chunkId": "il-ch03-02"
+        },
+        {
+          "id": "il-ch03-03",
+          "label": "Driver Education and the Cooperative Driver Testing Program",
+          "chunkId": "il-ch03-03"
+        },
+        {
+          "id": "il-ch03-04",
+          "label": "First-Time Drivers — Age 18-20",
+          "chunkId": "il-ch03-04"
+        },
+        {
+          "id": "il-ch03-05",
+          "label": "Graduated Driver Licensing Program",
+          "chunkId": "il-ch03-05"
+        },
+        {
+          "id": "il-ch03-06",
+          "label": "Parental Responsibility",
+          "chunkId": "il-ch03-06"
+        },
+        {
+          "id": "il-ch03-07",
+          "label": "Related Laws",
+          "chunkId": "il-ch03-07"
+        }
+      ]
+    },
+    {
+      "id": "ch04-traffic-laws",
+      "chapter": 4,
+      "label": "Traffic Laws",
+      "subtopics": [
+        {
+          "id": "il-ch04-01",
+          "label": "Proper Action When Stopped by Law Enforcement",
+          "chunkId": "il-ch04-01"
+        },
+        {
+          "id": "il-ch04-02",
+          "label": "Distracted Driving",
+          "chunkId": "il-ch04-02"
+        },
+        {
+          "id": "il-ch04-03",
+          "label": "Safety Belt Law",
+          "chunkId": "il-ch04-03"
+        },
+        {
+          "id": "il-ch04-04",
+          "label": "Child Passenger Protection Act",
+          "chunkId": "il-ch04-04"
+        },
+        {
+          "id": "il-ch04-05",
+          "label": "Speed Limits",
+          "chunkId": "il-ch04-05"
+        },
+        {
+          "id": "il-ch04-06",
+          "label": "Construction Zones, Emergency Vehicles, School Zones and Funeral Processions",
+          "chunkId": "il-ch04-06"
+        },
+        {
+          "id": "il-ch04-07",
+          "label": "Right of Way",
+          "chunkId": "il-ch04-07"
+        },
+        {
+          "id": "il-ch04-08",
+          "label": "Passing",
+          "chunkId": "il-ch04-08"
+        },
+        {
+          "id": "il-ch04-09",
+          "label": "Lane Usage",
+          "chunkId": "il-ch04-09"
+        },
+        {
+          "id": "il-ch04-10",
+          "label": "Signaling",
+          "chunkId": "il-ch04-10"
+        },
+        {
+          "id": "il-ch04-11",
+          "label": "Turning",
+          "chunkId": "il-ch04-11"
+        },
+        {
+          "id": "il-ch04-12",
+          "label": "Rotary and Roundabout",
+          "chunkId": "il-ch04-12"
+        },
+        {
+          "id": "il-ch04-13",
+          "label": "Special Stops",
+          "chunkId": "il-ch04-13"
+        },
+        {
+          "id": "il-ch04-14",
+          "label": "Parking",
+          "chunkId": "il-ch04-14"
+        },
+        {
+          "id": "il-ch04-15",
+          "label": "Prohibited Stopping, Standing or Parking",
+          "chunkId": "il-ch04-15"
+        },
+        {
+          "id": "il-ch04-16",
+          "label": "Additional Laws",
+          "chunkId": "il-ch04-16"
+        }
+      ]
+    },
+    {
+      "id": "ch05-sharing-the-road",
+      "chapter": 5,
+      "label": "Sharing the Road",
+      "subtopics": [
+        {
+          "id": "il-ch05-01",
+          "label": "Pedestrians",
+          "chunkId": "il-ch05-01"
+        },
+        {
+          "id": "il-ch05-02",
+          "label": "Children",
+          "chunkId": "il-ch05-02"
+        },
+        {
+          "id": "il-ch05-03",
+          "label": "Motorcycles",
+          "chunkId": "il-ch05-03"
+        },
+        {
+          "id": "il-ch05-04",
+          "label": "Autocycles",
+          "chunkId": "il-ch05-04"
+        },
+        {
+          "id": "il-ch05-05",
+          "label": "Bicycles — Manual, Gas or Electric Powered",
+          "chunkId": "il-ch05-05"
+        },
+        {
+          "id": "il-ch05-06",
+          "label": "Scooters and Mopeds",
+          "chunkId": "il-ch05-06"
+        },
+        {
+          "id": "il-ch05-07",
+          "label": "Large Vehicles",
+          "chunkId": "il-ch05-07"
+        },
+        {
+          "id": "il-ch05-08",
+          "label": "Disabled Vehicles",
+          "chunkId": "il-ch05-08"
+        },
+        {
+          "id": "il-ch05-09",
+          "label": "Low-Speed Vehicles",
+          "chunkId": "il-ch05-09"
+        },
+        {
+          "id": "il-ch05-10",
+          "label": "Slow-Moving Vehicles",
+          "chunkId": "il-ch05-10"
+        },
+        {
+          "id": "il-ch05-11",
+          "label": "Snowmobiles",
+          "chunkId": "il-ch05-11"
+        },
+        {
+          "id": "il-ch05-12",
+          "label": "Horseback Riders",
+          "chunkId": "il-ch05-12"
+        }
+      ]
+    },
+    {
+      "id": "ch06-driving-under-the-influence-dui",
+      "chapter": 6,
+      "label": "Driving Under the Influence (DUI)",
+      "subtopics": [
+        {
+          "id": "il-ch06-01",
+          "label": "Blood-Alcohol Concentration (BAC)/Presence of Drugs",
+          "chunkId": "il-ch06-01"
+        },
+        {
+          "id": "il-ch06-02",
+          "label": "Medical and Recreational Cannabis (Marijuana)",
+          "chunkId": "il-ch06-02"
+        },
+        {
+          "id": "il-ch06-03",
+          "label": "Other Drugs",
+          "chunkId": "il-ch06-03"
+        },
+        {
+          "id": "il-ch06-04",
+          "label": "DUI Laws",
+          "chunkId": "il-ch06-04"
+        },
+        {
+          "id": "il-ch06-05",
+          "label": "Related DUI Offenses",
+          "chunkId": "il-ch06-05"
+        },
+        {
+          "id": "il-ch06-06",
+          "label": "Drivers Under Age 21",
+          "chunkId": "il-ch06-06"
+        }
+      ]
+    },
+    {
+      "id": "ch07-traffic-violations-crashes",
+      "chapter": 7,
+      "label": "Traffic Violations/Crashes",
+      "subtopics": [
+        {
+          "id": "il-ch07-01",
+          "label": "Appearing in Court",
+          "chunkId": "il-ch07-01"
+        },
+        {
+          "id": "il-ch07-02",
+          "label": "Crash Reports",
+          "chunkId": "il-ch07-02"
+        },
+        {
+          "id": "il-ch07-03",
+          "label": "Leaving the Scene of a Crash",
+          "chunkId": "il-ch07-03"
+        },
+        {
+          "id": "il-ch07-04",
+          "label": "Unattended Vehicles",
+          "chunkId": "il-ch07-04"
+        },
+        {
+          "id": "il-ch07-05",
+          "label": "Safety Responsibility Law",
+          "chunkId": "il-ch07-05"
+        },
+        {
+          "id": "il-ch07-06",
+          "label": "Financial Responsibility Law",
+          "chunkId": "il-ch07-06"
+        },
+        {
+          "id": "il-ch07-07",
+          "label": "Crash Prevention Courses",
+          "chunkId": "il-ch07-07"
+        }
+      ]
+    },
+    {
+      "id": "ch08-drivers-license-revocation-suspension-denial-and-cancellation",
+      "chapter": 8,
+      "label": "Driver’s License Revocation, Suspension, Denial and Cancellation",
+      "subtopics": [
+        {
+          "id": "il-ch08-01",
+          "label": "Revocation",
+          "chunkId": "il-ch08-01"
+        },
+        {
+          "id": "il-ch08-02",
+          "label": "Suspension",
+          "chunkId": "il-ch08-02"
+        },
+        {
+          "id": "il-ch08-03",
+          "label": "Cancellation",
+          "chunkId": "il-ch08-03"
+        },
+        {
+          "id": "il-ch08-04",
+          "label": "Denial",
+          "chunkId": "il-ch08-04"
+        },
+        {
+          "id": "il-ch08-05",
+          "label": "Special Driving Permits",
+          "chunkId": "il-ch08-05"
+        }
+      ]
+    },
+    {
+      "id": "ch09-roadway-signs",
+      "chapter": 9,
+      "label": "Roadway Signs",
+      "subtopics": [
+        {
+          "id": "il-ch09-01",
+          "label": "Shapes of Signs",
+          "chunkId": "il-ch09-01"
+        },
+        {
+          "id": "il-ch09-02",
+          "label": "Colors of Signs",
+          "chunkId": "il-ch09-02"
+        },
+        {
+          "id": "il-ch09-03",
+          "label": "Regulatory Signs",
+          "chunkId": "il-ch09-03"
+        },
+        {
+          "id": "il-ch09-04",
+          "label": "Warning Signs",
+          "chunkId": "il-ch09-04"
+        },
+        {
+          "id": "il-ch09-05",
+          "label": "Construction and Maintenance Signs",
+          "chunkId": "il-ch09-05"
+        },
+        {
+          "id": "il-ch09-06",
+          "label": "Portable Changeable Message Signs",
+          "chunkId": "il-ch09-06"
+        },
+        {
+          "id": "il-ch09-07",
+          "label": "Other Special Signs",
+          "chunkId": "il-ch09-07"
+        },
+        {
+          "id": "il-ch09-08",
+          "label": "Guide Signs",
+          "chunkId": "il-ch09-08"
+        },
+        {
+          "id": "il-ch09-09",
+          "label": "Hazardous Materials Signs",
+          "chunkId": "il-ch09-09"
+        }
+      ]
+    },
+    {
+      "id": "ch10-traffic-signals-and-pavement-markings",
+      "chapter": 10,
+      "label": "Traffic Signals and Pavement Markings",
+      "subtopics": [
+        {
+          "id": "il-ch10-01",
+          "label": "Traffic Signals",
+          "chunkId": "il-ch10-01"
+        },
+        {
+          "id": "il-ch10-02",
+          "label": "Pavement Markings",
+          "chunkId": "il-ch10-02"
+        },
+        {
+          "id": "il-ch10-03",
+          "label": "Railroad Crossings",
+          "chunkId": "il-ch10-03"
+        }
+      ]
+    },
+    {
+      "id": "ch11-safe-driving-tips",
+      "chapter": 11,
+      "label": "Safe Driving Tips",
+      "subtopics": [
+        {
+          "id": "il-ch11-01",
+          "label": "Drive Defensively",
+          "chunkId": "il-ch11-01"
+        },
+        {
+          "id": "il-ch11-02",
+          "label": "Following Distances",
+          "chunkId": "il-ch11-02"
+        },
+        {
+          "id": "il-ch11-03",
+          "label": "Vehicle Speed",
+          "chunkId": "il-ch11-03"
+        },
+        {
+          "id": "il-ch11-04",
+          "label": "Drowsy Driving",
+          "chunkId": "il-ch11-04"
+        },
+        {
+          "id": "il-ch11-05",
+          "label": "Weather Conditions",
+          "chunkId": "il-ch11-05"
+        },
+        {
+          "id": "il-ch11-06",
+          "label": "Special Driving Situations and Hazards",
+          "chunkId": "il-ch11-06"
+        },
+        {
+          "id": "il-ch11-07",
+          "label": "Equipment Failure",
+          "chunkId": "il-ch11-07"
+        },
+        {
+          "id": "il-ch11-08",
+          "label": "Aggressive Driving",
+          "chunkId": "il-ch11-08"
+        },
+        {
+          "id": "il-ch11-09",
+          "label": "Stranded Motorists’ Safety Protocols",
+          "chunkId": "il-ch11-09"
+        }
+      ]
+    },
+    {
+      "id": "ch12-equipment-for-safe-driving",
+      "chapter": 12,
+      "label": "Equipment For Safe Driving",
+      "subtopics": [
+        {
+          "id": "il-ch12-01",
+          "label": "Required Equipment",
+          "chunkId": "il-ch12-01"
+        },
+        {
+          "id": "il-ch12-02",
+          "label": "Restricted Equipment",
+          "chunkId": "il-ch12-02"
+        }
+      ]
+    },
+    {
+      "id": "ch13-owning-a-vehicle",
+      "chapter": 13,
+      "label": "Owning a Vehicle",
+      "subtopics": [
+        {
+          "id": "il-ch13-01",
+          "label": "Purchasing a Vehicle",
+          "chunkId": "il-ch13-01"
+        },
+        {
+          "id": "il-ch13-02",
+          "label": "Vehicle Registration and Title",
+          "chunkId": "il-ch13-02"
+        },
+        {
+          "id": "il-ch13-03",
+          "label": "License Plate Requirements",
+          "chunkId": "il-ch13-03"
+        },
+        {
+          "id": "il-ch13-04",
+          "label": "Temporary Registration Permit",
+          "chunkId": "il-ch13-04"
+        },
+        {
+          "id": "il-ch13-05",
+          "label": "License Plate Renewal",
+          "chunkId": "il-ch13-05"
+        },
+        {
+          "id": "il-ch13-06",
+          "label": "Special License Plates",
+          "chunkId": "il-ch13-06"
+        },
+        {
+          "id": "il-ch13-07",
+          "label": "Reduced-fee License Plates",
+          "chunkId": "il-ch13-07"
+        }
+      ]
+    }
+  ]
+}
