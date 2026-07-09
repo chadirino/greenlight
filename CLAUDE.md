@@ -15,8 +15,10 @@ Source: Illinois Rules of the Road, published by the Illinois Secretary of State
 Pipeline used:
 1. PDF → `pdftotext -layout` → raw text
 2. Parsed table of contents → chapter/subtopic structure
-3. Split body text into 99 subtopic-aligned chunks (regex-matched against TOC headers, whitespace/pagebreak-tolerant)
+3. Split body text into 102 subtopic-aligned chunks (regex-matched against TOC headers, whitespace/pagebreak-tolerant)
 4. Output three files per state (see schema below)
+
+Chunking bug fixed: the original 99-chunk split missed 3 chapter-13 TOC entries (Mandatory Insurance, Emissions Testing, License Plates and Parking Placards for Persons with Disabilities) whose headers didn't match the splitting regex, so their text — plus the book's whole-document Answers-to-Study-Questions and Index back matter — all got appended onto the last matched chunk (`il-ch13-07`), bloating it to ~62,000 characters. Re-extracted from the source PDF (`~/Documents/Learning/Driving/IL Rules of the Road - Part 1.pdf` + `Part 2.pdf`), split into 4 correctly-sized chunks (`il-ch13-07` through `il-ch13-10`), and the back matter (not real chapter content) was discarded entirely.
 
 **Not yet done:** Step 2, generating the actual practice question bank from these chunks. This is the next task. Recommended approach: Sonnet 5 with extended thinking, one chunk at a time, question + explanation must be grounded only in that chunk's text, output must cite the source chunk id. Do not let the model draw on general knowledge — ground strictly in the retrieved chunk.
 
@@ -62,7 +64,7 @@ Adding a new state later = new folder under `/content/states/`, no app logic cha
 ```
 
 ### `questions.json` shape (built)
-352 questions across all 99 IL chunks, generated one chunk at a time and grounded strictly in that chunk's `text` (no outside knowledge). `topicId`/`subtopicId`/`chapter` mirror the real ids from `topics.json`/`chunks.json` rather than slugified placeholders, and the answer is stored as an index (not text) to avoid text-matching bugs in the UI:
+355 questions across all 102 IL chunks, generated one chunk at a time and grounded strictly in that chunk's `text` (no outside knowledge). `topicId`/`subtopicId`/`chapter` mirror the real ids from `topics.json`/`chunks.json` rather than slugified placeholders, and the answer is stored as an index (not text) to avoid text-matching bugs in the UI:
 ```json
 {
   "id": "il-ch04-01-q1",
@@ -77,8 +79,6 @@ Adding a new state later = new folder under `/content/states/`, no app logic cha
   "source": { "chunkId": "il-ch04-01", "chapterTitle": "Traffic Laws" }
 }
 ```
-
-Known data-quality issue: `il-ch13-07` ("Reduced-fee License Plates") is a ~62,000-character outlier chunk — a splitting artifact where it absorbed every remaining section after the last TOC header the regex matched in chapter 13 (Mandatory Insurance, Emissions Testing, disability plates/placards, then a garbled/OCR-scrambled tail covering license classifications and an ID-document table). Its 10 questions only cover the five coherent, legible sub-sections; the garbled tail was deliberately skipped. If chunking is re-run, this chunk boundary should be fixed so chapter 13's later sections get their own chunk ids.
 
 ## Routing plan
 State-aware from day one even with only one state: `/study/IL/[topicId]`, not hardcoded `/study/signs`. This avoids a URL/routing refactor later when a second state is added.
@@ -109,5 +109,5 @@ Since there's no server, cross-device sync is opt-in and user-owned:
 ## Repo state as of this brief
 - Git initialized, pushed to GitHub as `greenlight`. `main` is protected (PRs required, CI must pass, no approval required)
 - Next.js scaffolded (TypeScript, Tailwind, App Router) via `create-next-app` recommended defaults
-- `content/states/IL/{manual-meta,topics,chunks,questions}.json` present and committed — 352 questions generated across all 99 chunks
+- `content/states/IL/{manual-meta,topics,chunks,questions}.json` present and committed — 355 questions generated across all 102 chunks
 - No UI/routing/components built yet — this is the next task
