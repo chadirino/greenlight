@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 ## Project status
 
 - [x] Illinois content pipeline: handbook parsed into `manual-meta.json`, `topics.json`, `chunks.json`
-- [ ] `questions.json` — practice question bank generated from chunks (in progress)
+- [x] `questions.json` — 352 practice questions generated across all 99 chunks
 - [ ] Study UI / routing / mastery tracking
 
 ## Contributing

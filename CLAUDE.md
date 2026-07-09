@@ -61,20 +61,24 @@ Adding a new state later = new folder under `/content/states/`, no app logic cha
 }
 ```
 
-### `questions.json` shape (planned, not yet built)
+### `questions.json` shape (built)
+352 questions across all 99 IL chunks, generated one chunk at a time and grounded strictly in that chunk's `text` (no outside knowledge). `topicId`/`subtopicId`/`chapter` mirror the real ids from `topics.json`/`chunks.json` rather than slugified placeholders, and the answer is stored as an index (not text) to avoid text-matching bugs in the UI:
 ```json
 {
-  "id": "il-signs-014",
+  "id": "il-ch04-01-q1",
   "state": "IL",
-  "topic": "road-signs",
-  "subtopic": "warning-signs",
+  "topicId": "ch04-traffic-laws",
+  "subtopicId": "il-ch04-01",
+  "chapter": 4,
   "question": "...",
   "options": ["...", "...", "...", "..."],
-  "answer": "...",
+  "answerIndex": 0,
   "explanation": "...",
-  "source": { "section": "Chapter 3, p. 22", "chunkId": "il-ch03-01" }
+  "source": { "chunkId": "il-ch04-01", "chapterTitle": "Traffic Laws" }
 }
 ```
+
+Known data-quality issue: `il-ch13-07` ("Reduced-fee License Plates") is a ~62,000-character outlier chunk — a splitting artifact where it absorbed every remaining section after the last TOC header the regex matched in chapter 13 (Mandatory Insurance, Emissions Testing, disability plates/placards, then a garbled/OCR-scrambled tail covering license classifications and an ID-document table). Its 10 questions only cover the five coherent, legible sub-sections; the garbled tail was deliberately skipped. If chunking is re-run, this chunk boundary should be fixed so chapter 13's later sections get their own chunk ids.
 
 ## Routing plan
 State-aware from day one even with only one state: `/study/IL/[topicId]`, not hardcoded `/study/signs`. This avoids a URL/routing refactor later when a second state is added.
@@ -103,8 +107,7 @@ Since there's no server, cross-device sync is opt-in and user-owned:
 - Not attempting real DMV test questions — those aren't published by the state; `questions.json` entries are original questions grounded in the handbook text, not replicas of the actual exam.
 
 ## Repo state as of this brief
-- Git initialized, pushed to GitHub as `greenlight`
+- Git initialized, pushed to GitHub as `greenlight`. `main` is protected (PRs required, CI must pass, no approval required)
 - Next.js scaffolded (TypeScript, Tailwind, App Router) via `create-next-app` recommended defaults
-- `content/states/IL/{manual-meta,topics,chunks}.json` present and committed
-- `questions.json` not yet generated — this is the next task
-- No UI/routing/components built yet
+- `content/states/IL/{manual-meta,topics,chunks,questions}.json` present and committed — 352 questions generated across all 99 chunks
+- No UI/routing/components built yet — this is the next task
