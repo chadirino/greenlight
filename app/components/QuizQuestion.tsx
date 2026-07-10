@@ -8,6 +8,7 @@ interface QuizQuestionProps {
   chapterLabel?: string;
   questionNumber?: number;
   totalQuestions?: number;
+  onAnswer?: (isCorrect: boolean) => void;
   onNext?: () => void;
 }
 
@@ -35,6 +36,7 @@ export default function QuizQuestion({
   chapterLabel = "Chapter 4 \u00b7 Traffic laws",
   questionNumber = 3,
   totalQuestions = 8,
+  onAnswer = () => {},
   onNext = () => {},
 }: QuizQuestionProps) {
   const [selected, setSelected] = useState<number | null>(null);
@@ -42,6 +44,7 @@ export default function QuizQuestion({
   function handleSelect(index: number) {
     if (selected !== null) return;
     setSelected(index);
+    onAnswer(index === question.answerIndex);
   }
 
   const isCorrect = selected !== null && selected === question.answerIndex;
@@ -61,7 +64,7 @@ export default function QuizQuestion({
         {Array.from({ length: totalQuestions }).map((_, i) => (
           <div
             key={i}
-            className={`h-1 flex-1 rounded-[2px] ${i < questionNumber ? "bg-ink" : "bg-[var(--c-line)]"}`}
+            className={`h-1 flex-1 rounded-[2px] ${i < questionNumber ? "bg-ink" : "bg-[var(--color-line)]"}`}
           />
         ))}
       </div>
