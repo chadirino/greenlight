@@ -3,7 +3,7 @@
 import { useCallback, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 import type { Topic } from "@/lib/types";
-import { getTopicProgress } from "@/lib/progress";
+import { getTopicProgress, STORAGE_KEY } from "@/lib/progress";
 
 interface TopicListProps {
   topics: Topic[];
@@ -39,22 +39,35 @@ function statusFor(state: string, topicId: string): Status {
 // server snapshot renders every topic as "not started" (a neutral, truthful
 // default); useSyncExternalStore re-syncs to the real client snapshot right
 // after hydration, without a synchronous setState-in-effect.
+//
+// useSyncExternalStore requires getSnapshot/getServerSnapshot to return the
+// exact same reference when nothing's changed, or React treats every render
+// as a fresh emission and logs "should be cached to avoid an infinite loop".
+// Both snapshots are cached here: getSnapshot only rebuilds when the raw
+// localStorage string actually differs from last time, and getServerSnapshot
+// caches its (always-"not-started") result since it never depends on storage.
 function useTopicStatuses(state: string, topics: Topic[]): Record<string, Status> {
-  const cacheRef = useRef<Record<string, Status> | null>(null);
+  const cacheRef = useRef<{ raw: string | null; result: Record<string, Status> } | null>(null);
+  const serverCacheRef = useRef<Record<string, Status> | null>(null);
 
   const getSnapshot = useCallback(() => {
-    if (!cacheRef.current) {
-      const result: Record<string, Status> = {};
-      for (const topic of topics) result[topic.id] = statusFor(state, topic.id);
-      cacheRef.current = result;
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (cacheRef.current && cacheRef.current.raw === raw) {
+      return cacheRef.current.result;
     }
-    return cacheRef.current;
+    const result: Record<string, Status> = {};
+    for (const topic of topics) result[topic.id] = statusFor(state, topic.id);
+    cacheRef.current = { raw, result };
+    return result;
   }, [state, topics]);
 
   const getServerSnapshot = useCallback(() => {
-    const result: Record<string, Status> = {};
-    for (const topic of topics) result[topic.id] = "not-started";
-    return result;
+    if (!serverCacheRef.current) {
+      const result: Record<string, Status> = {};
+      for (const topic of topics) result[topic.id] = "not-started";
+      serverCacheRef.current = result;
+    }
+    return serverCacheRef.current;
   }, [topics]);
 
   return useSyncExternalStore(noopSubscribe, getSnapshot, getServerSnapshot);
