@@ -1,10 +1,16 @@
 "use client";
 
-import { useCallback, useRef, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
+import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { Question, Topic } from "@/lib/types";
-import { recordAttempt } from "@/lib/progress";
+import {
+  getSessionSize,
+  getTopicProgress,
+  recordAttempt,
+  selectSessionQuestions,
+  type TopicProgress,
+} from "@/lib/progress";
 import QuizQuestion from "@/app/components/QuizQuestion";
+import TopicComplete from "@/app/components/TopicComplete";
 
 interface QuizRunnerProps {
   state: string;
@@ -13,30 +19,53 @@ interface QuizRunnerProps {
   questions: Question[];
 }
 
-function shuffle<T>(items: T[]): T[] {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
-
 function noopSubscribe() {
   return () => {};
 }
 
-// Randomizing must happen once, after mount: the server-prerendered HTML and
-// the client's first hydration pass have to agree on question order, so the
-// server snapshot stays in original order and the shuffle only takes effect
-// once useSyncExternalStore re-syncs on the client.
-function useShuffledOrder(questions: Question[]): Question[] {
-  const cacheRef = useRef<Question[] | null>(null);
+// A session targets 8-15 questions (see getSessionSize), sized off however
+// many pool questions are still uncovered (never attempted) rather than the
+// full pool. That's what makes a 38-question chapter split into 13/13/12
+// instead of 13/13/13-with-a-repeat: the last coverage session is exactly as
+// big as what's left. Once the whole pool is covered, sizing falls back to
+// the full pool so repeat-practice rounds still land in the 8-15 range.
+function buildSession(
+  state: string,
+  topicId: string,
+  questions: Question[],
+  poolQuestionIds: string[],
+): Question[] {
+  const progress = getTopicProgress(state, topicId);
+  const uncoveredCount = poolQuestionIds.filter(
+    (id) => (progress.questions[id]?.attempts ?? 0) === 0,
+  ).length;
+  const sessionSize = getSessionSize(uncoveredCount > 0 ? uncoveredCount : questions.length);
+  return selectSessionQuestions(state, topicId, questions, sessionSize);
+}
+
+// Session selection depends on localStorage, which the server can't see. The
+// server snapshot renders the pool in original order (a neutral, truthful
+// default); useSyncExternalStore re-syncs to the real, coverage-based session
+// once hydration completes. `version` lets a restart force a fresh session
+// without needing a new `questions` reference.
+function useSessionQueue(
+  state: string,
+  topicId: string,
+  questions: Question[],
+  poolQuestionIds: string[],
+  version: number,
+): Question[] {
+  const cacheRef = useRef<{ version: number; queue: Question[] } | null>(null);
 
   const getSnapshot = useCallback(() => {
-    if (!cacheRef.current) cacheRef.current = shuffle(questions);
-    return cacheRef.current;
-  }, [questions]);
+    if (!cacheRef.current || cacheRef.current.version !== version) {
+      cacheRef.current = {
+        version,
+        queue: buildSession(state, topicId, questions, poolQuestionIds),
+      };
+    }
+    return cacheRef.current.queue;
+  }, [state, topicId, questions, poolQuestionIds, version]);
 
   const getServerSnapshot = useCallback(() => questions, [questions]);
 
@@ -44,41 +73,50 @@ function useShuffledOrder(questions: Question[]): Question[] {
 }
 
 export default function QuizRunner({ state, topicId, topic, questions }: QuizRunnerProps) {
-  const order = useShuffledOrder(questions);
+  const [version, setVersion] = useState(0);
+  const poolQuestionIds = useMemo(() => questions.map((q) => q.id), [questions]);
+  const order = useSessionQueue(state, topicId, questions, poolQuestionIds, version);
   const [index, setIndex] = useState(0);
+  const [sessionComplete, setSessionComplete] = useState(false);
+  const [latestProgress, setLatestProgress] = useState<TopicProgress | null>(null);
 
-  const poolSize = questions.length;
   const currentQuestion = order[index];
-  const done = index >= order.length;
 
   function handleAnswer(isCorrect: boolean) {
-    recordAttempt(state, topicId, isCorrect, poolSize);
+    setLatestProgress(
+      recordAttempt(state, topicId, currentQuestion.id, isCorrect, poolQuestionIds),
+    );
   }
 
   function handleNext() {
-    setIndex((i) => i + 1);
+    if (index + 1 >= order.length) {
+      setSessionComplete(true);
+    } else {
+      setIndex((i) => i + 1);
+    }
   }
 
-  if (done) {
+  function handleRestart() {
+    setVersion((v) => v + 1);
+    setIndex(0);
+    setSessionComplete(false);
+  }
+
+  if (sessionComplete && latestProgress) {
     return (
-      <div className="max-w-md mx-auto text-center">
-        <p className="text-[18px] font-semibold text-ink">Nice work for this session.</p>
-        <p className="mt-2 text-[14px] leading-relaxed text-text-3">
-          You&rsquo;ve been through every question in {topic.label} for now.
-        </p>
-        <Link
-          href={`/study/${state}`}
-          className="mt-6 inline-flex items-center justify-center border-2 border-ink bg-ink px-5 py-3 text-[14px] font-semibold tracking-[0.01em] text-bg transition-colors duration-150 hover:border-orange hover:bg-orange"
-        >
-          Back to topics
-        </Link>
-      </div>
+      <TopicComplete
+        topicLabel={topic.label}
+        state={state}
+        topicId={topicId}
+        progress={latestProgress}
+        onRestart={handleRestart}
+      />
     );
   }
 
   return (
     <QuizQuestion
-      key={currentQuestion.id}
+      key={`${version}-${currentQuestion.id}`}
       question={currentQuestion}
       chapterLabel={`Chapter ${topic.chapter} · ${topic.label}`}
       questionNumber={index + 1}
