@@ -1,26 +1,117 @@
+/*
+  Greenlight — Global styles & design tokens
+  Ported from chadweaver.io: PERSONAL_DESIGN_SYSTEM.md + docs/style-guide.md
+
+  Tailwind v4: this file IS the config. Theme customization lives in the
+  @theme block below instead of a separate tailwind.config.ts.
+
+  Fonts are loaded via next/font in app/layout.tsx, which exposes
+  --font-space-grotesk and --font-space-mono as CSS variables on <html>.
+  See the layout.tsx snippet provided alongside this file.
+*/
+
 @import "tailwindcss";
 
+@theme {
+  /* ---------- Color: surfaces & text ---------- */
+  --color-bg: #f9f6f0;              /* page background, warm cream */
+  --color-ink: #131212;             /* primary text, borders, dark fills — ~45:1 on bg */
+  --color-text-2: #555555;          /* secondary text — labels, captions — ~6.0:1 AA */
+  --color-text-3: #666666;          /* body copy, descriptions — ~4.8:1 AA */
+
+  /* ---------- Color: on-dark surface tokens (for content sitting on --color-ink) ---------- */
+  --color-on-ink: #f9f6f0;              /* = --color-bg */
+  --color-on-ink-secondary: #888888;    /* = --color-dim */
+  --color-on-ink-accent: #e8634a;       /* = --color-orange */
+
+  /* ---------- Color: non-text grays — dividers/dark-panel text ONLY, never text on cream ---------- */
+  --color-dim: #888888;     /* muted text within dark panels only */
+  --color-faint: #aaaaaa;   /* secondary text within dark panels only */
+  --color-line: #e8e3da;    /* list dividers, hatch patterns — never text */
+  --color-ddd: #dddddd;     /* placeholder borders only */
+
+  /* ---------- Color: brand accents ---------- */
+  --color-orange: #e8634a;
+  --color-orange-light: #fdeae5;
+  --color-orange-text: #9e3620;      /* orange text ON orange-light bg — AA */
+
+  --color-purple: #887ba3;           /* 3.3:1 on bg — large bold text (>=36px/700) ONLY, or decorative */
+  --color-purple-light: #f0edf8;
+  --color-purple-dark: #4a3f63;      /* purple text ON purple-light bg — AA */
+
+  --color-green: #2d7a4f;
+  --color-green-light: #e6f4ed;
+
+  --color-blue: #1864ab;
+  --color-blue-light: #e3eefb;
+  --color-blue-text: #0d4276;
+
+  --color-border-dark: #444444;      /* borders on dark --color-ink surfaces only */
+
+  /* ---------- Fonts ---------- */
+  /* Space Grotesk = anything read as content or interacted with as UI */
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  /* Space Mono = anything functioning as a label, tag, caption, or structural marker */
+  --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---------- Type scale ---------- */
+  /* Literal px steps, matching the source system (it's not a modular scale). */
+  --text-9: 9px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;   /* body base */
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-28: 28px;
+  --text-32: 32px;
+  /* Fluid page-title sizes. Add more named steps only when a real component needs one —
+     the source system treats these as per-component, not a systematic scale. */
+  --text-hero: clamp(36px, 5vw, 60px);
+  --text-hero-lg: clamp(36px, 5vw, 72px);
+
+  /* ---------- Line height ---------- */
+  --leading-body: 1.5;
+  --leading-heading: 1.05;
+
+  /* ---------- Letter spacing ---------- */
+  --tracking-tight: -0.03em;   /* page-level display titles */
+  --tracking-normal: 0.01em;   /* buttons */
+  --tracking-loose: 0.12em;    /* orange eyebrow labels */
+
+  /* ---------- Radius ---------- */
+  /* Default `rounded` (4px) is already correct for tags/badges/pills.
+     Block-level containers and cards stay square — don't add a rounded class to them. */
+  --radius: 4px;
+}
+
+/* Two tokens with no natural Tailwind theme namespace — used directly as CSS vars
+   (e.g. a sticky nav: className="z-[var(--z-nav)]") rather than generated utilities. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --z-nav: 100;
+  --z-overlay: 9999;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: var(--leading-body);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Global focus-visible outline: orange, 2px, offset 2px.
+     Override per-component only where a dark-surface variant is needed
+     (e.g. outline-color: var(--color-on-ink) on ink backgrounds). */
+  :focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+  }
 }

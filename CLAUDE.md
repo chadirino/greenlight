@@ -107,7 +107,33 @@ Since there's no server, cross-device sync is opt-in and user-owned:
 - Not attempting real DMV test questions — those aren't published by the state; `questions.json` entries are original questions grounded in the handbook text, not replicas of the actual exam.
 
 ## Repo state as of this brief
-- Git initialized, pushed to GitHub as `greenlight`. `main` is protected (PRs required, CI must pass, no approval required)
-- Next.js scaffolded (TypeScript, Tailwind, App Router) via `create-next-app` recommended defaults
-- `content/states/IL/{manual-meta,topics,chunks,questions}.json` present and committed — 355 questions generated across all 102 chunks
-- No UI/routing/components built yet — this is the next task
+- Git initialized, pushed to GitHub as `greenlight`. `main` is protected (PRs required, CI must pass, no approval required). CI (`.github/workflows/ci.yml`) runs `npm run lint` and `npm run build` on every PR and push to `main`.
+- Content pipeline complete and committed: `content/states/IL/{manual-meta,topics,chunks,questions}.json` — 13 chapters, 102 chunks, 355 questions grounded one-to-one against chunk text.
+- App shell exists but is minimal: `app/layout.tsx`, `app/globals.css`, `app/page.tsx` only. No `app/components/`, `app/study/[state]/[topicId]/` routes, or `lib/` yet — none of the code-convention paths below exist on disk yet, they're where new code should land.
+- Design system just landed: `app/globals.css` now defines the real token set (colors, type scale, spacing) via a Tailwind v4 `@theme` block, ported from chadweaver.io's design system; `app/layout.tsx` loads Space Grotesk / Space Mono via `next/font`. `app/page.tsx` is a placeholder (eyebrow label + hero title + subhead) that exercises the tokens — not real study UI.
+- Working tree currently has uncommitted changes to `CLAUDE.md`, `app/globals.css`, `app/layout.tsx`, `app/page.tsx` (the design-system + placeholder-homepage work above) — not yet committed or pushed.
+- README and CI workflow are written and committed (`a7d54d1`).
+- Still not built: study UI, routing, mastery-gating logic, localStorage progress tracking, import/export — this is the next task.
+
+## Working agreements
+- Don't add new dependencies (npm packages, CDN scripts) without asking first.
+- Don't restructure existing folders (e.g. `/content`, `/app`) without asking first.
+- If a task seems underspecified, ask what specifically needs to change rather than guessing.
+- Don't touch `content/states/**/*.json` by hand in the course of an unrelated task — those are generated data, not app code.
+
+## Design tokens
+Visual tokens (colors, type scale, spacing, radius, borders) live in `app/globals.css` under the Tailwind v4 `@theme` block. They were ported from chadweaver.io's `PERSONAL_DESIGN_SYSTEM.md` and `docs/style-guide.md` — treat those as the source of truth. Don't invent new colors, fonts, or spacing values outside the existing token set without asking first. If the chadweaver.io system changes, update tokens here to match rather than letting them drift independently.
+
+## Commands
+```bash
+npm run dev     # local dev server
+npm run lint    # must pass — CI runs this on every PR
+npm run build   # must pass — CI runs this on every PR, also validates the static export
+```
+
+## Code conventions
+- Components live under `app/components/`, one component per file, PascalCase filenames.
+- Routes stay state-aware: `app/study/[state]/[topicId]/`, never hardcode `IL`.
+- Shared types go in one place (e.g. `lib/types.ts`), not scattered inline interfaces.
+- Tailwind utility classes only — no CSS-in-JS, no styled-components. Use the token-based classes from `globals.css`.
+- Default to server components; add `"use client"` only where interactivity is required (quiz state, progress tracking, mastery gating).
