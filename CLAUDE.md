@@ -109,11 +109,10 @@ Since there's no server, cross-device sync is opt-in and user-owned:
 ## Repo state as of this brief
 - Git initialized, pushed to GitHub as `greenlight`. `main` is protected (PRs required, CI must pass, no approval required). CI (`.github/workflows/ci.yml`) runs `npm run lint` and `npm run build` on every PR and push to `main`.
 - Content pipeline complete and committed: `content/states/IL/{manual-meta,topics,chunks,questions}.json` — 13 chapters, 102 chunks, 355 questions grounded one-to-one against chunk text.
-- App shell exists but is minimal: `app/layout.tsx`, `app/globals.css`, `app/page.tsx` only. No `app/components/`, `app/study/[state]/[topicId]/` routes, or `lib/` yet — none of the code-convention paths below exist on disk yet, they're where new code should land.
+- App shell: `app/layout.tsx`, `app/globals.css`, `app/page.tsx`. `app/components/` and `lib/` now exist too — `app/components/QuizQuestion.tsx` (a quiz-question UI component) and `lib/types.tsx` (shared `Question` type). No `app/study/[state]/[topicId]/` routes yet — that's still where new routing code should land.
 - Design system just landed: `app/globals.css` now defines the real token set (colors, type scale, spacing) via a Tailwind v4 `@theme` block, ported from chadweaver.io's design system; `app/layout.tsx` loads Space Grotesk / Space Mono via `next/font`. `app/page.tsx` is a placeholder (eyebrow label + hero title + subhead) that exercises the tokens — not real study UI.
-- Working tree currently has uncommitted changes to `CLAUDE.md`, `app/globals.css`, `app/layout.tsx`, `app/page.tsx` (the design-system + placeholder-homepage work above) — not yet committed or pushed.
-- README and CI workflow are written and committed (`a7d54d1`).
-- Still not built: study UI, routing, mastery-gating logic, localStorage progress tracking, import/export — this is the next task.
+- README and CI workflow are written and committed (`a7d54d1`). Design tokens + homepage placeholder are committed and merged to `main` (PR #3).
+- Still not built: study UI wiring (`QuizQuestion` isn't hooked up to real routes/data yet), routing, mastery-gating logic, localStorage progress tracking, import/export — this is the next task.
 
 ## Working agreements
 - Don't add new dependencies (npm packages, CDN scripts) without asking first.
