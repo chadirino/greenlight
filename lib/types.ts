@@ -13,3 +13,28 @@ export interface Question {
     chapterTitle: string;
   };
 }
+
+export interface Subtopic {
+  id: string;
+  label: string;
+  chunkId: string;
+}
+
+export interface Topic {
+  id: string;
+  chapter: number;
+  label: string;
+  subtopics: Subtopic[];
+}
+
+export interface TopicsFile {
+  state: string;
+  source: {
+    name: string;
+    publisher: string;
+    formNumber: string;
+    edition: string;
+    url: string;
+  };
+  topics: Topic[];
+}
