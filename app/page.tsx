@@ -1,4 +1,12 @@
+import { getAvailableStates, getTopics } from "@/lib/content";
+import HomeSummary from "@/app/components/HomeSummary";
+
 export default function Home() {
+  const states = getAvailableStates().map((s) => ({
+    ...s,
+    topics: getTopics(s.code),
+  }));
+
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-6 py-32 text-center">
       <p className="font-mono text-[13px] uppercase tracking-[0.12em] text-orange">
@@ -11,6 +19,7 @@ export default function Home() {
         Mastery-based practice for your state driving exam, grounded in the
         official handbook.
       </p>
+      <HomeSummary states={states} />
     </main>
   );
 }

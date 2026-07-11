@@ -38,3 +38,18 @@ export interface TopicsFile {
   };
   topics: Topic[];
 }
+
+export interface ManualMeta {
+  state: string;
+  stateName: string;
+  source: {
+    name: string;
+    publisher: string;
+    formNumber: string;
+    edition: string;
+    url: string;
+  };
+  chapterCount: number;
+  chunkCount: number;
+  generatedAt: string;
+}
