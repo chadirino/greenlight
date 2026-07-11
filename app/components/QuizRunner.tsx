@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useRouter } from "next/navigation";
 import type { Question, Topic } from "@/lib/types";
 import {
   getSessionSize,
@@ -73,6 +74,7 @@ function useSessionQueue(
 }
 
 export default function QuizRunner({ state, topicId, topic, questions }: QuizRunnerProps) {
+  const router = useRouter();
   const [version, setVersion] = useState(0);
   const poolQuestionIds = useMemo(() => questions.map((q) => q.id), [questions]);
   const order = useSessionQueue(state, topicId, questions, poolQuestionIds, version);
@@ -115,14 +117,24 @@ export default function QuizRunner({ state, topicId, topic, questions }: QuizRun
   }
 
   return (
-    <QuizQuestion
-      key={`${version}-${currentQuestion.id}`}
-      question={currentQuestion}
-      chapterLabel={`Chapter ${topic.chapter} · ${topic.label}`}
-      questionNumber={index + 1}
-      totalQuestions={order.length}
-      onAnswer={handleAnswer}
-      onNext={handleNext}
-    />
+    <div className="max-w-md mx-auto">
+      <button
+        type="button"
+        onClick={() => router.push(`/study/${state}`)}
+        className="mb-3 font-mono text-[10px] uppercase tracking-[0.10em] text-text-2 transition-colors duration-150 hover:text-orange-text"
+      >
+        &larr; Exit session
+      </button>
+
+      <QuizQuestion
+        key={`${version}-${currentQuestion.id}`}
+        question={currentQuestion}
+        chapterLabel={`Chapter ${topic.chapter} · ${topic.label}`}
+        questionNumber={index + 1}
+        totalQuestions={order.length}
+        onAnswer={handleAnswer}
+        onNext={handleNext}
+      />
+    </div>
   );
 }
