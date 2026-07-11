@@ -1,8 +1,13 @@
 import { useCallback, useRef, useSyncExternalStore } from "react";
-import { STORAGE_KEY } from "@/lib/progress";
+import { PROGRESS_CHANGED_EVENT, STORAGE_KEY } from "@/lib/progress";
 
-function noopSubscribe() {
-  return () => {};
+// writeStore dispatches PROGRESS_CHANGED_EVENT on every persisted change, so
+// this is what lets e.g. HomeSummary resync right after a same-tab
+// DataControls import — localStorage's own "storage" event never fires in
+// the document that made the write.
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener(PROGRESS_CHANGED_EVENT, onStoreChange);
+  return () => window.removeEventListener(PROGRESS_CHANGED_EVENT, onStoreChange);
 }
 
 // localStorage-backed snapshot hook shared by any component that needs to
@@ -35,5 +40,5 @@ export function useProgressSnapshot<T>(buildSnapshot: () => T, buildServerSnapsh
     return serverCacheRef.current.result;
   }, [buildServerSnapshot]);
 
-  return useSyncExternalStore(noopSubscribe, getSnapshot, getServerSnapshot);
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

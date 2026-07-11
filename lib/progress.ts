@@ -2,6 +2,13 @@ import type { Question } from "@/lib/types";
 
 export const STORAGE_KEY = "greenlight:progress";
 
+// Fired whenever writeStore persists a change, so same-tab components (e.g.
+// HomeSummary after a DataControls import) can resync via
+// useProgressSnapshot without a full page reload. localStorage's own
+// "storage" event only fires in *other* tabs/documents, never the one that
+// made the write.
+export const PROGRESS_CHANGED_EVENT = "greenlight:progress-changed";
+
 export interface QuestionRecord {
   attempts: number;
   correct: number;
@@ -43,6 +50,7 @@ function readStore(): ProgressStore {
 function writeStore(store: ProgressStore): void {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  window.dispatchEvent(new Event(PROGRESS_CHANGED_EVENT));
 }
 
 function shuffle<T>(items: T[]): T[] {
@@ -123,6 +131,117 @@ export function recordAttempt(
 
 export function isTopicMastered(state: string, topicId: string): boolean {
   return getTopicProgress(state, topicId).mastered;
+}
+
+export interface ProgressExport {
+  schemaVersion: 1;
+  exportedAt: string;
+  data: ProgressStore;
+}
+
+export function exportProgress(): string {
+  const envelope: ProgressExport = {
+    schemaVersion: 1,
+    exportedAt: new Date().toISOString(),
+    data: readStore(),
+  };
+  return JSON.stringify(envelope);
+}
+
+function sanitizeQuestions(value: unknown): TopicProgress["questions"] {
+  if (!value || typeof value !== "object") return {};
+  const result: TopicProgress["questions"] = {};
+  for (const [id, record] of Object.entries(value as Record<string, unknown>)) {
+    if (!record || typeof record !== "object") continue;
+    const { attempts, correct, lastCorrect } = record as Record<string, unknown>;
+    if (typeof attempts !== "number" || typeof correct !== "number") continue;
+    result[id] = { attempts, correct, lastCorrect: lastCorrect === true };
+  }
+  return result;
+}
+
+function isRawTopicRecord(
+  value: unknown,
+): value is { attempts: number; correct: number; questions?: unknown } {
+  if (!value || typeof value !== "object") return false;
+  const record = value as Record<string, unknown>;
+  return typeof record.attempts === "number" && typeof record.correct === "number";
+}
+
+// Merges an imported export into the local store. Per topic, whichever side
+// has more cumulative attempts wins wholesale (its full record, including
+// the per-question map) — ties keep local — mirroring the "max of
+// attempts/correct, not last-write-wins" policy already planned for the
+// future OAuth sync path. `mastered` is never trusted from the file: it's
+// recomputed against the app's current question pool, since an old export's
+// notion of "fully covered" can go stale if the content changes.
+//
+// poolQuestionIds is keyed by state then topicId so the merge stays
+// state-agnostic; a topic missing from it means "not part of this app's
+// current content" and its imported record is skipped rather than trusted
+// blindly (an unknown pool size would make a coverage check meaningless).
+export function importProgress(
+  json: string,
+  poolQuestionIds: Record<string, Record<string, string[]>>,
+): { ok: boolean; error?: string } {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(json);
+  } catch {
+    return { ok: false, error: "That file isn't valid JSON." };
+  }
+
+  if (!parsed || typeof parsed !== "object") {
+    return { ok: false, error: "That file isn't a Greenlight progress export." };
+  }
+
+  const envelope = parsed as Record<string, unknown>;
+  if (envelope.schemaVersion !== 1) {
+    return { ok: false, error: "Unsupported export version." };
+  }
+  if (!envelope.data || typeof envelope.data !== "object") {
+    return { ok: false, error: "That file isn't a Greenlight progress export." };
+  }
+
+  const importedData = envelope.data as Record<string, Record<string, unknown>>;
+  const localStore = readStore();
+  const mergedStore: ProgressStore = { ...localStore };
+
+  for (const [state, topics] of Object.entries(importedData)) {
+    if (!topics || typeof topics !== "object") continue;
+    const statePool = poolQuestionIds[state];
+    if (!statePool) continue;
+
+    const localState = mergedStore[state] ?? {};
+    let updatedState = localState;
+
+    for (const [topicId, rawRecord] of Object.entries(topics)) {
+      const pool = statePool[topicId];
+      if (!pool || !isRawTopicRecord(rawRecord)) continue;
+
+      const importedTopic: TopicProgress = {
+        attempts: rawRecord.attempts,
+        correct: rawRecord.correct,
+        mastered: false,
+        questions: sanitizeQuestions(rawRecord.questions),
+      };
+      const localTopic = localState[topicId] ?? EMPTY_TOPIC_PROGRESS;
+      const winner = importedTopic.attempts > localTopic.attempts ? importedTopic : localTopic;
+
+      updatedState = {
+        ...updatedState,
+        [topicId]: {
+          ...winner,
+          mastered: computeMastered(winner.attempts, winner.correct, winner.questions, pool),
+        },
+      };
+    }
+
+    mergedStore[state] = updatedState;
+  }
+
+  writeStore(mergedStore);
+  return { ok: true };
 }
 
 // Chunks a topic's pool into 8-15 question sessions regardless of chapter
