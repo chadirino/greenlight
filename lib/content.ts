@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Question, Topic, TopicsFile } from "@/lib/types";
+import type { ManualMeta, Question, Topic, TopicsFile } from "@/lib/types";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content", "states");
 
@@ -16,6 +16,13 @@ export function getSupportedStates(): string[] {
     .readdirSync(CONTENT_ROOT, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
+}
+
+export function getAvailableStates(): { code: string; label: string }[] {
+  return getSupportedStates().map((code) => {
+    const meta = readJson<ManualMeta>(code, "manual-meta.json");
+    return { code, label: meta?.stateName ?? code };
+  });
 }
 
 export function getTopics(state: string): Topic[] {

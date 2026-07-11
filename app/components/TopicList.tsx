@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useRef, useSyncExternalStore } from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 import type { Topic } from "@/lib/types";
-import { getTopicProgress, STORAGE_KEY } from "@/lib/progress";
+import { getTopicProgress } from "@/lib/progress";
+import { useProgressSnapshot } from "@/lib/useProgressSnapshot";
 
 interface TopicListProps {
   topics: Topic[];
@@ -24,10 +25,6 @@ const STATUS_CLASSES: Record<Status, string> = {
   mastered: "border-green bg-green-light text-green",
 };
 
-function noopSubscribe() {
-  return () => {};
-}
-
 function statusFor(state: string, topicId: string): Status {
   const progress = getTopicProgress(state, topicId);
   if (progress.mastered) return "mastered";
@@ -37,40 +34,22 @@ function statusFor(state: string, topicId: string): Status {
 
 // The status map depends on localStorage, which the server can't see. The
 // server snapshot renders every topic as "not started" (a neutral, truthful
-// default); useSyncExternalStore re-syncs to the real client snapshot right
+// default); useProgressSnapshot re-syncs to the real client snapshot right
 // after hydration, without a synchronous setState-in-effect.
-//
-// useSyncExternalStore requires getSnapshot/getServerSnapshot to return the
-// exact same reference when nothing's changed, or React treats every render
-// as a fresh emission and logs "should be cached to avoid an infinite loop".
-// Both snapshots are cached here: getSnapshot only rebuilds when the raw
-// localStorage string actually differs from last time, and getServerSnapshot
-// caches its (always-"not-started") result since it never depends on storage.
 function useTopicStatuses(state: string, topics: Topic[]): Record<string, Status> {
-  const cacheRef = useRef<{ raw: string | null; result: Record<string, Status> } | null>(null);
-  const serverCacheRef = useRef<Record<string, Status> | null>(null);
-
-  const getSnapshot = useCallback(() => {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (cacheRef.current && cacheRef.current.raw === raw) {
-      return cacheRef.current.result;
-    }
+  const buildSnapshot = useCallback(() => {
     const result: Record<string, Status> = {};
     for (const topic of topics) result[topic.id] = statusFor(state, topic.id);
-    cacheRef.current = { raw, result };
     return result;
   }, [state, topics]);
 
-  const getServerSnapshot = useCallback(() => {
-    if (!serverCacheRef.current) {
-      const result: Record<string, Status> = {};
-      for (const topic of topics) result[topic.id] = "not-started";
-      serverCacheRef.current = result;
-    }
-    return serverCacheRef.current;
+  const buildServerSnapshot = useCallback(() => {
+    const result: Record<string, Status> = {};
+    for (const topic of topics) result[topic.id] = "not-started";
+    return result;
   }, [topics]);
 
-  return useSyncExternalStore(noopSubscribe, getSnapshot, getServerSnapshot);
+  return useProgressSnapshot(buildSnapshot, buildServerSnapshot);
 }
 
 export default function TopicList({ topics, state }: TopicListProps) {
