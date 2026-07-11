@@ -1,11 +1,20 @@
-import { getAvailableStates, getTopics } from "@/lib/content";
+import { getAvailableStates, getQuestionsForTopic, getTopics } from "@/lib/content";
 import HomeSummary from "@/app/components/HomeSummary";
+import DataControls from "@/app/components/DataControls";
 
 export default function Home() {
   const states = getAvailableStates().map((s) => ({
     ...s,
     topics: getTopics(s.code),
   }));
+
+  const poolQuestionIds: Record<string, Record<string, string[]>> = {};
+  for (const s of states) {
+    poolQuestionIds[s.code] = {};
+    for (const topic of s.topics) {
+      poolQuestionIds[s.code][topic.id] = getQuestionsForTopic(s.code, topic.id).map((q) => q.id);
+    }
+  }
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-6 py-32 text-center">
@@ -20,6 +29,7 @@ export default function Home() {
         official handbook.
       </p>
       <HomeSummary states={states} />
+      <DataControls poolQuestionIds={poolQuestionIds} />
     </main>
   );
 }
