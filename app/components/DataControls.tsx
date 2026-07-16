@@ -40,7 +40,13 @@ export default function DataControls({ poolQuestionIds }: DataControlsProps) {
       const result = importProgress(text, poolQuestionIds);
       setStatus(
         result.ok
-          ? { type: "success", message: "Progress imported." }
+          ? {
+              type: "success",
+              message:
+                result.topicsImported && result.topicsImported > 0
+                  ? "Progress imported."
+                  : "No usable progress found in that file.",
+            }
           : { type: "error", message: result.error ?? "Import failed." },
       );
     };

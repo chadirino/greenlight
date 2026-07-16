@@ -1,6 +1,5 @@
 import { getAvailableStates, getQuestionsForTopic, getTopics } from "@/lib/content";
-import HomeSummary from "@/app/components/HomeSummary";
-import DataControls from "@/app/components/DataControls";
+import HomeScope from "@/app/components/HomeScope";
 
 export default function Home() {
   const states = getAvailableStates().map((s) => ({
@@ -28,8 +27,7 @@ export default function Home() {
         Mastery-based practice for your state driving exam, grounded in the
         official handbook.
       </p>
-      <HomeSummary states={states} />
-      <DataControls poolQuestionIds={poolQuestionIds} />
+      <HomeScope states={states} poolQuestionIds={poolQuestionIds} />
     </main>
   );
 }
