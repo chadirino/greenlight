@@ -138,6 +138,7 @@ Built and shipped as `app/components/DataControls.tsx` + `lib/progress.ts`: thin
 - Don't add new colors, fonts, or spacing values outside the existing token set without asking first.
 - Don't introduce a new styling pattern (CSS modules, inline styles, styled-components) — Tailwind utility classes only.
 - If a task seems underspecified, ask what specifically needs to change rather than guessing.
+- Never run `git reset --hard` without running `git status` first to check for uncommitted changes on other files.
 
 ### Verification
 - Before reporting a UI task done, take a screenshot and compare it against the patterns in CLAUDE.md — not just lint/build/functional verification.
