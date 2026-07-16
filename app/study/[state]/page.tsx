@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSupportedStates, getTopics } from "@/lib/content";
 import TopicList from "@/app/components/TopicList";
@@ -21,7 +22,14 @@ export default async function StudyStatePage({
   return (
     <main className="flex flex-1 flex-col px-6 py-16">
       <div className="mx-auto w-full max-w-2xl">
-        <h1 className="text-[24px] font-semibold tracking-tight text-ink">
+        <Link
+          href="/"
+          aria-label="Back to home"
+          className="text-[14px] font-semibold text-text-3 transition-colors duration-150 hover:text-orange"
+        >
+          ← Home
+        </Link>
+        <h1 className="mt-4 text-[24px] font-semibold tracking-tight text-ink">
           {state} Rules of the Road
         </h1>
         <p className="mt-2 text-[14px] text-text-3">Pick a topic to start practicing.</p>

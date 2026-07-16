@@ -183,7 +183,7 @@ function isRawTopicRecord(
 export function importProgress(
   json: string,
   poolQuestionIds: Record<string, Record<string, string[]>>,
-): { ok: boolean; error?: string } {
+): { ok: boolean; error?: string; topicsImported?: number } {
   let parsed: unknown;
   try {
     parsed = JSON.parse(json);
@@ -206,6 +206,7 @@ export function importProgress(
   const importedData = envelope.data as Record<string, Record<string, unknown>>;
   const localStore = readStore();
   const mergedStore: ProgressStore = { ...localStore };
+  let topicsImported = 0;
 
   for (const [state, topics] of Object.entries(importedData)) {
     if (!topics || typeof topics !== "object") continue;
@@ -235,13 +236,14 @@ export function importProgress(
           mastered: computeMastered(winner.attempts, winner.correct, winner.questions, pool),
         },
       };
+      topicsImported++;
     }
 
     mergedStore[state] = updatedState;
   }
 
   writeStore(mergedStore);
-  return { ok: true };
+  return { ok: true, topicsImported };
 }
 
 // Chunks a topic's pool into 8-15 question sessions regardless of chapter
