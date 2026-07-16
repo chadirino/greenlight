@@ -18,6 +18,10 @@ export function getSupportedStates(): string[] {
     .map((entry) => entry.name);
 }
 
+export function getManualMeta(state: string): ManualMeta | undefined {
+  return readJson<ManualMeta>(state, "manual-meta.json");
+}
+
 export function getAvailableStates(): { code: string; label: string }[] {
   return getSupportedStates().map((code) => {
     const meta = readJson<ManualMeta>(code, "manual-meta.json");

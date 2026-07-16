@@ -55,7 +55,7 @@ export default function DataControls({ poolQuestionIds }: DataControlsProps) {
   }
 
   return (
-    <div className="mt-10 flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-2 border-t border-[var(--color-line)] pt-6">
       <div className="flex flex-wrap items-center justify-center gap-3">
         <button type="button" onClick={handleExport} className={BUTTON_CLASSES}>
           Export Progress

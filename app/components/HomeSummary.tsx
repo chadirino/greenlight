@@ -58,14 +58,14 @@ export default function HomeSummary({ states }: HomeSummaryProps) {
   const statuses = useStateStatuses(states);
 
   return (
-    <div className="mt-10 flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6">
       {states.map((s) => {
         const status = statuses[s.code];
         return (
-          <div key={s.code} className="flex flex-col items-center gap-3">
+          <div key={s.code} className="flex flex-col items-center gap-2">
             <Link
               href={`/study/${s.code}`}
-              className="inline-flex items-center justify-center border-2 border-ink bg-ink px-5 py-3 text-[14px] font-semibold tracking-[0.01em] text-bg transition-colors duration-150 hover:border-orange hover:bg-orange"
+              className="inline-flex items-center justify-center border-2 border-ink bg-ink px-10 py-3 text-[14px] font-semibold tracking-[0.01em] text-bg transition-colors duration-150 hover:border-orange hover:bg-orange"
             >
               {status.anyProgress ? "Continue Studying" : "Start Studying"}
             </Link>
